@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
+
+    <context:component-scan base-package="com.backbase.expert.cmis.ptc"/>
+
+    <bean id="propertyConfigurerStandalone"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+
+        <property name="properties">
+            <util:properties location="classpath:cmis.properties"/>
+        </property>
+        <property name="location">
+            <bean class="org.springframework.core.io.FileSystemResource">
+                <constructor-arg>
+                    <jee:jndi-lookup
+                            jndi-name="java:comp/env/cmis/properties"
+                            lookup-on-startup="true"
+                            expected-type="java.lang.String"
+                            default-value="ignore"/>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="cmisService" class="com.backbase.expert.cmis.impl.CMISServiceImpl">
+        <constructor-arg type="java.lang.String" index="0" value="${cmis.endpointUrl}"/>
+    </bean>
+
+    <bean id="cmisHelper" class="com.backbase.expert.cmis.impl.alfresco.AlfrescoHelperImpl"/>
+
+    <bean id="cmisCommandFactory" class="com.backbase.expert.cmis.impl.alfresco.AlfrescoCMISCommandFactoryImpl">
+        <constructor-arg ref="cmisService"/>
+        <constructor-arg ref="cmisHelper"/>
+    </bean>
+
+    <bean id="cmisDataProvider" class="com.backbase.expert.cmis.ptc.CMISDataProvider">
+    </bean>
+
+</beans>

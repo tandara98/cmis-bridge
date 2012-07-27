@@ -1,0 +1,5 @@
+Compatibility matrix
+
+VERSION		PORTAL VERSION
+0.1			5.0.4
+0.2			5.1.x
