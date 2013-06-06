@@ -19,7 +19,7 @@ How to setup with Portal 5
 
 2. Add cmis.properties file to /src/main/resources
 
-3. Setup PTC 
+3. Setup PTC
 
 4. Setup widget
 
