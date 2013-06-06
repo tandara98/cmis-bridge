@@ -1,5 +1,6 @@
 How to setup with Portal 5
-==============
+==========================
+
 1. Add cmis bridge dependency and mashup to POM
 
 	<backbase.portal.mashup.version>5.0.0</backbase.portal.mashup.version>
@@ -23,7 +24,8 @@ How to setup with Portal 5
 4. Setup widget
 
 License
-==============
+=======
+
 Copyright 2013 Backbase B.V.
 
 Licensed under the Apache License, Version 2.0 (the "License");
